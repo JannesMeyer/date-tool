@@ -4,9 +4,9 @@
 [![Dependencies](https://david-dm.org/JannesMeyer/date-tool.svg)](https://david-dm.org/JannesMeyer/date-tool)
 [![Development Dependencies](https://david-dm.org/JannesMeyer/date-tool/dev-status.svg)](https://david-dm.org/JannesMeyer/date-tool#info=devDependencies)
 
-Install the library
-
-	npm install date-tool
+~~~bash
+npm install date-tool
+~~~
 
 Import the parts you need
 
