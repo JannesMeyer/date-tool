@@ -1,10 +1,10 @@
 {
   "name": "date-tool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Useful functions for handling Dates",
   "keywords": [ "date" ],
   "author": "Jannes Meyer <jannes.meyer@gmail.com>",
-  "license": "GPLv3",
+  "license": "LGPLv3",
   "repository": "JannesMeyer/date-tool",
   "scripts": {
     "prepublish": "make",
