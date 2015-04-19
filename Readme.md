@@ -28,8 +28,8 @@ Formats the current date as per ISO 8601. For example: `2015-02-05`
 
 ## throttle
 
-	throttle(func, wait, options) → Function
+	throttle(func, wait[, options]) → Function
 
 ## debounce
 
-	debounce(fn, wait, hash) → Function
+	debounce(fn, wait[, hash]) → Function
