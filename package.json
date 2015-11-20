@@ -1,18 +1,21 @@
 {
   "name": "date-tool",
-  "version": "1.0.3",
+  "version": "1.0.4",
+  "keywords": [
+    "date"
+  ],
   "description": "Useful functions for handling Dates",
-  "keywords": [ "date" ],
   "author": "Jannes Meyer <jannes.meyer@gmail.com>",
-  "license": "LGPLv3",
   "repository": "JannesMeyer/date-tool",
+  "license": "LGPL-3.0",
   "scripts": {
     "prepublish": "make",
     "test": "make test"
   },
   "main": "date-tool.es5.js",
   "devDependencies": {
-    "babel": "x",
-    "jasmine": "^2.2.1"
+    "babel-cli": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "jasmine": "^2.3.2"
   }
 }

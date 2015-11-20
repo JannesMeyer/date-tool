@@ -9,13 +9,10 @@ all: node_modules $(js) $(spec)
 test: all
 	$(JASMINE)
 
-test-without-color: all
-	$(JASMINE) --no-color
+%.es5.js:: %.js
+	$(BABEL) --presets es2015 -o $@ $<
 
 node_modules:
 	npm install
 
-%.es5.js:: %.js
-	$(BABEL) -o $@ $<
-
-.PHONY: all test test-without-color
+.PHONY: all test
