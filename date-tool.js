@@ -1,22 +1,49 @@
+const isoDateRegex = /^(?:(?:([\d]{4})-)?(0?[1-9]|1[0-2])-)?(0?[1-9]|[12][0-9]|3[01])$/;
+
 /**
- * Formats the current date in a custom format.
+ * For example: 08:00
+ */
+export function getTimeString(date = new Date()) {
+	let hours = addLeadingZero(date.getHours());
+	let minutes = addLeadingZero(date.getMinutes());
+
+	return `${hours}:${minutes}`;
+}
+
+/**
  * For example: 2 Feb 2015
  */
-export function getDateString() {
-	var date = new Date();
-	var year = date.getFullYear();
-	var monthName = date.toLocaleString('en-US', { month: 'short' });
-	var day = date.getDate();
+export function getDateString(date = new Date()) {
+	let year = date.getFullYear();
+	let month = date.toLocaleString('en-US', { month: 'short' });
+	let day = date.getDate();
 
-	return `${day} ${monthName} ${year}`;
+	return `${day} ${month} ${year}`;
+}
+
+/**
+ * For example: 02.02.2015
+ */
+export function getDateString2(date = new Date()) {
+	let year = date.getFullYear();
+	let month = addLeadingZero(date.getMonth() + 1);
+	let day = addLeadingZero(date.getDate());
+
+  return `${day}.${month}.${year}`;
+}
+
+/**
+ * For example: Feb
+ */
+export function getShortMonthName(date = new Date()) {
+	return date.toLocaleString('en-US', { month: 'short' });
 }
 
 /**
  * Formats the current date as per ISO 8601
  * For example: 2015-02-05
  */
-export function getIsoDateString() {
-	var date = new Date();
+export function getIsoDateString(date = new Date()) {
 	var year = date.getFullYear();
 	var month = addLeadingZero(date.getMonth() + 1);
 	var day = addLeadingZero(date.getDate());
@@ -25,11 +52,32 @@ export function getIsoDateString() {
 }
 
 /**
+ * Parse a date string that is more or less formatted like ISO 8601.
+ *
+ * But actually it doesn't adhere to the standard at all, because it allows
+ * the omission of the year and the month.
+ *
+ * It also doesn't check if the month and day are within reasonable bounds.
+ */
+export function parseIsoDateString(string) {
+  let result = isoDateRegex.exec(string);
+  if (!result) {
+    throw new Error('Could not parse the date');
+  }
+
+  let date = new Date();
+  if (result[1] != null) { date.setFullYear(result[1]); }
+  if (result[2] != null) { date.setMonth(result[2] - 1); }
+  if (result[3] != null) { date.setDate(result[3]); }
+  return date;
+}
+
+/**
  * Add a leading zero and convert to String if the number is
  * smaller than 10
  */
 function addLeadingZero(number) {
-	var str = number.toString();
+	var str = String(number);
 	if (str.length < 2) {
 		str = '0' + str;
 	}
