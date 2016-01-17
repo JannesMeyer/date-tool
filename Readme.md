@@ -4,32 +4,50 @@
 [![Dependencies](https://david-dm.org/JannesMeyer/date-tool.svg)](https://david-dm.org/JannesMeyer/date-tool)
 [![Development Dependencies](https://david-dm.org/JannesMeyer/date-tool/dev-status.svg)](https://david-dm.org/JannesMeyer/date-tool#info=devDependencies)
 
-~~~bash
-npm install date-tool
-~~~
+Installation:
 
-Import the parts you need
+	npm install date-tool
 
-~~~js
+Import the parts you need:
+
+```js
 import { getDateString } from 'date-tool';
-~~~
+```
 
-## getDateString
+## Functions
+
+### getDateString
 
 	getDateString() → String
 
 Formats the current date in a custom format. For example: `2 Feb 2015`
 
-## getIsoDateString
+### getIsoDateString
 
 	getIsoDateString() → String
 
 Formats the current date as per ISO 8601. For example: `2015-02-05`
 
-## throttle
+### throttle
 
 	throttle(func, wait[, options]) → Function
 
-## debounce
+### debounce
 
 	debounce(fn, wait[, hash]) → Function
+
+
+## Contributing
+
+Download source and compile:
+
+	git clone git@github.com:[USERNAME]/date-tool.git
+	make
+
+Watch for changes and recompile:
+
+	make watch
+
+Run tests:
+
+	npm test
