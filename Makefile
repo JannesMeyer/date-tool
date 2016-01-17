@@ -1,18 +1,19 @@
-BABEL=./node_modules/.bin/babel
-JASMINE=./node_modules/.bin/jasmine
+BABEL = ./node_modules/.bin/babel
 
-js = date-tool.es5.js
-spec = spec/date-tool-spec.es5.js
+.PHONY: all
+all: node_modules
+	@$(BABEL) . --out-dir . --ignore "node_modules" --extensions ".es6"
 
-all: node_modules $(js) $(spec)
+.PHONY: watch
+watch: node_modules
+	@$(BABEL) . -w --out-dir . --ignore "node_modules" --extensions ".es6"
 
-test: all
-	$(JASMINE)
-
-%.es5.js:: %.js
-	$(BABEL) --presets es2015 -o $@ $<
+.PHONY: clean
+clean:
+	-rm -f *.log *.js ./spec/*.js
 
 node_modules:
 	npm install
 
-.PHONY: all test
+%.js:: %.es6
+	$(BABEL) $< --out-file $@
