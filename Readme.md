@@ -4,9 +4,7 @@
 [![Dependencies](https://david-dm.org/JannesMeyer/date-tool.svg)](https://david-dm.org/JannesMeyer/date-tool)
 [![Development Dependencies](https://david-dm.org/JannesMeyer/date-tool/dev-status.svg)](https://david-dm.org/JannesMeyer/date-tool#info=devDependencies)
 
-Installation:
-
-	npm install date-tool
+[![npm](https://nodei.co/npm/date-tool.png?compact=true)](https://www.npmjs.com/package/date-tool)
 
 Import the parts you need:
 
