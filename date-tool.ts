@@ -3,7 +3,7 @@ const isoDateRegex = /^(?:(?:([\d]{4})-)?(0?[1-9]|1[0-2])-)?(0?[1-9]|[12][0-9]|3
 /**
  * For example: 08:00
  */
-export function getTimeString(date = new Date()) {
+export function getTimeString(date = new Date()): string {
 	let hours = addLeadingZero(date.getHours());
 	let minutes = addLeadingZero(date.getMinutes());
 
@@ -13,7 +13,7 @@ export function getTimeString(date = new Date()) {
 /**
  * For example: 2 Feb 2015
  */
-export function getDateString(date = new Date()) {
+export function getDateString(date = new Date()): string {
 	let year = date.getFullYear();
 	let month = date.toLocaleString('en-US', { month: 'short' });
 	let day = date.getDate();
@@ -24,7 +24,7 @@ export function getDateString(date = new Date()) {
 /**
  * For example: 02.02.2015
  */
-export function getDateString2(date = new Date()) {
+export function getDateString2(date = new Date()): string {
 	let year = date.getFullYear();
 	let month = addLeadingZero(date.getMonth() + 1);
 	let day = addLeadingZero(date.getDate());
@@ -35,7 +35,7 @@ export function getDateString2(date = new Date()) {
 /**
  * For example: Feb
  */
-export function getShortMonthName(date = new Date()) {
+export function getShortMonthName(date = new Date()): string {
 	return date.toLocaleString('en-US', { month: 'short' });
 }
 
@@ -43,7 +43,7 @@ export function getShortMonthName(date = new Date()) {
  * Formats the current date as per ISO 8601
  * For example: 2015-02-05
  */
-export function getIsoDateString(date = new Date()) {
+export function getIsoDateString(date = new Date()): string {
 	var year = date.getFullYear();
 	var month = addLeadingZero(date.getMonth() + 1);
 	var day = addLeadingZero(date.getDate());
@@ -59,24 +59,24 @@ export function getIsoDateString(date = new Date()) {
  *
  * It also doesn't check if the month and day are within reasonable bounds.
  */
-export function parseIsoDateString(string) {
-  let result = isoDateRegex.exec(string);
+export function parseIsoDateString(str: string): Date {
+  let result = isoDateRegex.exec(str);
   if (!result) {
     throw new Error('Could not parse the date');
   }
 
   let date = new Date();
-  if (result[1] != null) { date.setFullYear(result[1]); }
-  if (result[2] != null) { date.setMonth(result[2] - 1); }
-  if (result[3] != null) { date.setDate(result[3]); }
+  if (result[1] != null) { date.setFullYear(Number(result[1])); }
+  if (result[2] != null) { date.setMonth(Number(result[2]) - 1); }
+  if (result[3] != null) { date.setDate(Number(result[3])); }
   return date;
 }
 
 /**
- * Add a leading zero and convert to String if the number is
+ * Add a leading zero and convert to string if the number is
  * smaller than 10
  */
-function addLeadingZero(number) {
+function addLeadingZero(number: number): string {
 	var str = String(number);
 	if (str.length < 2) {
 		str = '0' + str;
@@ -93,7 +93,7 @@ function addLeadingZero(number) {
  *
  * Taken from Underscore.js 1.8.2
  */
-export function throttle(func, wait, options) {
+export function throttle(fn: Function, wait: number, options?: any): any {
 	var context, args, result;
 	var timeout = null;
 	var previous = 0;
@@ -101,7 +101,7 @@ export function throttle(func, wait, options) {
 	var later = function() {
 		previous = options.leading === false ? 0 : Date.now();
 		timeout = null;
-		result = func.apply(context, args);
+		result = fn.apply(context, args);
 		if (!timeout) context = args = null;
 	};
 	return function() {
@@ -116,7 +116,7 @@ export function throttle(func, wait, options) {
 				timeout = null;
 			}
 			previous = now;
-			result = func.apply(context, args);
+			result = fn.apply(context, args);
 			if (!timeout) context = args = null;
 		} else if (!timeout && options.trailing !== false) {
 			timeout = setTimeout(later, remaining);
@@ -130,8 +130,10 @@ export function throttle(func, wait, options) {
  * Returns a function, that, as long as it continues to be invoked, will not
  * be triggered. The function will be called after it stops being called for
  * N milliseconds.
+ * 
+ * Optionally it groups by the nth parameter (specified by paramIndex)
  */
-export function debounce(fn, wait, hash) {
+export function debounce(fn: Function, wait: number, paramIndex?: (number | Function)): any {
 	var timeouts = {};
 
 	// Called everytime a timeout fires
@@ -153,10 +155,10 @@ export function debounce(fn, wait, hash) {
 	return function() {
 		// Hash this call
 		var key;
-		if (typeof hash === 'number') {
-			key = arguments[hash];
-		} else if (typeof hash === 'function') {
-			key = hash.apply(undefined, arguments);
+		if (typeof paramIndex === 'number') {
+			key = arguments[paramIndex];
+		} else if (typeof paramIndex === 'function') {
+			key = paramIndex.apply(undefined, arguments);
 		} else {
 			key = 'all';
 		}

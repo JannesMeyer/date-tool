@@ -1,4 +1,4 @@
-import DateTool from '..';
+import * as DateTool from '..';
 
 describe("something", () => {
 	it("does something", () => {
