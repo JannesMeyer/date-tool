@@ -39,13 +39,19 @@ Formats the current date as per ISO 8601. For example: `2015-02-05`
 
 Download source and compile:
 
-	git clone git@github.com:[USERNAME]/date-tool.git
-	make
+```sh
+git clone git@github.com:JannesMeyer/date-tool.git
+yarn
+```
 
-Watch for changes and recompile:
+Compile and watch for file changes:
 
-	make watch
+```sh
+yarn start
+```
 
 Run tests:
 
-	npm test
+```sh
+yarn test
+```
